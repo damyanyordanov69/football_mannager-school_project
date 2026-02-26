@@ -10,12 +10,19 @@ INSERT INTO Teams (name, city, league_id) VALUES
 ('Sharks FC', 'Varna', 1),
 ('Dragons', 'Ruse', 1);
 
--- Добавяне на играчи
-INSERT INTO Players (first_name, last_name, age, team_id) VALUES 
-('Ivan', 'Ivanov', 25, 1), ('Georgi', 'Petrov', 22, 1),
-('Stefan', 'Stoianov', 28, 2), ('Dimitar', 'Berbatov', 35, 2),
-('Nikolay', 'Kolev', 21, 3), ('Hristo', 'Stoichkov', 40, 3),
-('Petar', 'Zanev', 24, 4), ('Martin', 'Petrov', 30, 4);
+-- Добавяне на играчи (ОБНОВЕНИ с дата на раждане и позиция спрямо новата таблица)
+INSERT INTO Players (first_name, last_name, birth_date, position, team_id) VALUES 
+('Ivan', 'Ivanov', '1998-05-14', 'FW', 1), 
+('Georgi', 'Petrov', '2001-08-22', 'MF', 1),
+('Stefan', 'Stoianov', '1995-10-10', 'DF', 2), 
+('Dimitar', 'Berbatov', '1988-01-30', 'FW', 2),
+('Nikolay', 'Kolev', '2002-07-07', 'MF', 3), 
+('Hristo', 'Stoichkov', '1983-02-08', 'FW', 3),
+('Petar', 'Zanev', '1999-12-01', 'DF', 4), 
+('Martin', 'Petrov', '1993-01-15', 'MF', 4),
+-- Добавени още 2 играчи, за да станат общо 10 (според изискванията на учителя)
+('Dimitar', 'Iliev', '1990-05-05', 'GK', 1),
+('Nikolay', 'Mihaylov', '1988-08-12', 'GK', 2);
 
 -- Добавяне на мачове
 INSERT INTO Matches (home_team_id, away_team_id, home_score, away_score, match_date) 
