@@ -1,168 +1,185 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
-namespace FootballProject // Увери се, че името тук съвпада с твоя проект
+namespace FootballProject
 {
     public partial class Form1 : Form
     {
-        // Създаваме връзката към репозиторито (където са SQL заявките)
-        private TeamsRepository _repo;
+        private TeamsRepository _teamsRepo = new TeamsRepository();
+        private PlayersRepository _playersRepo = new PlayersRepository();
 
         public Form1()
         {
             InitializeComponent();
-            _repo = new TeamsRepository();
         }
 
-        // 1. Зареждане на формата
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadData();
+            LoadTeamsData();
+            LoadPlayersDropdowns();
+            LoadPlayersData();
         }
 
-        // Помощен метод за презареждане на таблицата
-        // Помощен метод за презареждане на таблицата
-        private void LoadData()
+        // ======================= ТАБ 1: ОТБОРИ =======================
+        private void LoadTeamsData()
         {
             try
             {
-                // 1. Зареждаме данните в таблицата
-                dgvTeams.DataSource = _repo.GetAll();
-
-                // 2. ПРЕМАХВАМЕ маркировката от първия ред
+                dgvTeams.DataSource = _teamsRepo.GetAll();
                 dgvTeams.ClearSelection();
-
-                // 3. Изчистваме текстовите полета, за да са напълно празни при стартиране
-                txtTeamId.Clear();
-                txtName.Clear();
-                txtCity.Clear();
+                txtTeamId.Clear(); txtTeamName.Clear(); txtTeamCity.Clear();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Грешка при зареждане на данните: " + ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show("Грешка отбори: " + ex.Message); }
         }
 
-        // 2. Клик върху ред в DataGridView (пълни полетата)
         private void dgvTeams_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvTeams.SelectedRows.Count > 0)
             {
-                var row = dgvTeams.SelectedRows[0];
-                var team = (Team)row.DataBoundItem;
-
+                var team = (Team)dgvTeams.SelectedRows[0].DataBoundItem;
                 txtTeamId.Text = team.TeamId.ToString();
-                txtName.Text = team.Name;
-                txtCity.Text = team.City;
+                txtTeamName.Text = team.Name;
+                txtTeamCity.Text = team.City;
             }
         }
 
-        // 3. Логика за бутона ДОБАВИ
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAddTeam_Click(object sender, EventArgs e)
         {
-            // Валидация: Името не може да е празно
-            if (string.IsNullOrWhiteSpace(txtName.Text))
-            {
-                MessageBox.Show("Името на отбора е задължително!");
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(txtTeamName.Text)) return;
+            _teamsRepo.Add(new Team { Name = txtTeamName.Text, City = txtTeamCity.Text });
+            MessageBox.Show("Отборът е добавен!");
+            LoadTeamsData();
+            LoadPlayersDropdowns(); // Обновява падащото меню при играчите!
+        }
 
+        private void btnEditTeam_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTeamId.Text)) return;
+            _teamsRepo.Update(new Team { TeamId = int.Parse(txtTeamId.Text), Name = txtTeamName.Text, City = txtTeamCity.Text });
+            MessageBox.Show("Отборът е редактиран!");
+            LoadTeamsData();
+            LoadPlayersDropdowns();
+        }
+
+        private void btnDeleteTeam_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTeamId.Text)) return;
+            if (MessageBox.Show("Сигурни ли сте?", "Потвърждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try { _teamsRepo.Delete(int.Parse(txtTeamId.Text)); LoadTeamsData(); LoadPlayersDropdowns(); }
+                catch (Exception ex) { MessageBox.Show("Не може да се изтрие отбор с играчи! "); }
+            }
+        }
+
+        // ======================= ТАБ 2: ИГРАЧИ =======================
+        private void LoadPlayersDropdowns()
+        {
+            var teams = _teamsRepo.GetAll();
+
+            // Филтър Отбори
+            var filterTeams = new List<Team> { new Team { TeamId = 0, Name = "Всички" } };
+            filterTeams.AddRange(teams);
+            cboFilterTeam.DataSource = filterTeams;
+            cboFilterTeam.DisplayMember = "Name";
+            cboFilterTeam.ValueMember = "TeamId";
+
+            // Отбори за добавяне
+            cboTeam.DataSource = new List<Team>(teams);
+            cboTeam.DisplayMember = "Name";
+            cboTeam.ValueMember = "TeamId";
+
+            // Позиции
+            if (cboPosition.Items.Count == 0)
+            {
+                string[] pos = { "GK", "DF", "MF", "FW" };
+                cboPosition.Items.AddRange(pos);
+                cboFilterPosition.Items.Add("Всички");
+                cboFilterPosition.Items.AddRange(pos);
+                cboFilterPosition.SelectedIndex = 0;
+            }
+        }
+
+        private void LoadPlayersData()
+        {
             try
             {
-                // Създаваме нов обект отбор с въведените данни
-                var newTeam = new Team
-                {
-                    Name = txtName.Text,
-                    City = txtCity.Text
-                };
+                int? teamId = cboFilterTeam.SelectedValue as int?;
+                string position = cboFilterPosition.SelectedItem?.ToString();
+                string search = txtSearchName.Text;
 
-                // Извикваме Add() от репозиторито
-                _repo.Add(newTeam);
-
-                MessageBox.Show("Отборът е добавен успешно!");
-
-                // Изчистваме полетата и презареждаме таблицата
-                txtName.Clear();
-                txtCity.Clear();
-                txtTeamId.Clear();
-                LoadData();
+                dgvPlayers.DataSource = _playersRepo.GetPlayers(teamId, position, search);
+                if (dgvPlayers.Columns.Contains("TeamId")) dgvPlayers.Columns["TeamId"].Visible = false;
+                dgvPlayers.ClearSelection();
             }
-            catch (Exception ex)
+            catch { }
+        }
+
+        private void dgvPlayers_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvPlayers.SelectedRows.Count > 0)
             {
-                MessageBox.Show("Грешка при добавяне: " + ex.Message);
+                var p = (Player)dgvPlayers.SelectedRows[0].DataBoundItem;
+                txtPlayerId.Text = p.PlayerId.ToString();
+                txtFirstName.Text = p.FirstName;
+                txtLastName.Text = p.LastName;
+                dtpBirthDate.Value = p.BirthDate;
+                cboPosition.SelectedItem = p.Position;
+                cboTeam.SelectedValue = p.TeamId;
             }
         }
 
-        // 4. Логика за бутона РЕДАКТИРАЙ
-        private void btnEdit_Click(object sender, EventArgs e)
+        private bool ValidatePlayer()
         {
-            // Проверяваме дали има избрано ID
-            if (string.IsNullOrWhiteSpace(txtTeamId.Text))
-            {
-                MessageBox.Show("Моля, изберете отбор от таблицата, който да редактирате!");
-                return;
-            }
+            if (txtFirstName.Text.Length < 3) { MessageBox.Show("Поне 3 символа за име!"); return false; }
+            if (cboPosition.SelectedIndex == -1 || cboTeam.SelectedValue == null) { MessageBox.Show("Изберете позиция и отбор!"); return false; }
+            int age = DateTime.Now.Year - dtpBirthDate.Value.Year;
+            if (age < 15 || age > 50) { MessageBox.Show("Възраст между 15 и 50!"); return false; }
+            return true;
+        }
 
-            try
-            {
-                // Създаваме обект с новите данни и СТАРОТО ID
-                var teamToUpdate = new Team
-                {
-                    TeamId = int.Parse(txtTeamId.Text),
-                    Name = txtName.Text,
-                    City = txtCity.Text
-                };
+        private void btnAddPlayer_Click(object sender, EventArgs e)
+        {
+            if (!ValidatePlayer()) return;
+            _playersRepo.Add(new Player { FirstName = txtFirstName.Text, LastName = txtLastName.Text, BirthDate = dtpBirthDate.Value, Position = cboPosition.SelectedItem.ToString(), TeamId = (int)cboTeam.SelectedValue });
+            LoadPlayersData();
+            MessageBox.Show("Добавен!");
+        }
 
-                // Извикваме Update() от репозиторито
-                _repo.Update(teamToUpdate);
+        private void btnEditPlayer_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPlayerId.Text) || !ValidatePlayer()) return;
+            _playersRepo.Update(new Player { PlayerId = int.Parse(txtPlayerId.Text), FirstName = txtFirstName.Text, LastName = txtLastName.Text, BirthDate = dtpBirthDate.Value, Position = cboPosition.SelectedItem.ToString(), TeamId = (int)cboTeam.SelectedValue });
+            LoadPlayersData();
+            MessageBox.Show("Редактиран!");
+        }
 
-                MessageBox.Show("Отборът е редактиран успешно!");
-                LoadData();
-            }
-            catch (Exception ex)
+        private void btnDeletePlayer_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPlayerId.Text)) return;
+            if (MessageBox.Show("Изтриване?", "Потвърждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                MessageBox.Show("Грешка при редакция: " + ex.Message);
+                _playersRepo.Delete(int.Parse(txtPlayerId.Text)); LoadPlayersData();
             }
         }
 
-        // 5. Логика за бутона ИЗТРИЙ
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnClearPlayer_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtTeamId.Text))
-            {
-                MessageBox.Show("Моля, изберете отбор от таблицата, който да изтриете!");
-                return;
-            }
+            txtPlayerId.Clear(); txtFirstName.Clear(); txtLastName.Clear();
+            cboPosition.SelectedIndex = -1;
+            if (dtpBirthDate.MaxDate > DateTime.Now.AddYears(-20) && dtpBirthDate.MinDate < DateTime.Now.AddYears(-20))
+                dtpBirthDate.Value = DateTime.Now.AddYears(-20);
+        }
 
-            // Питаме потребителя дали е сигурен
-            var confirm = MessageBox.Show("Сигурни ли сте, че искате да изтриете този отбор?",
-                                          "Потвърждение",
-                                          MessageBoxButtons.YesNo,
-                                          MessageBoxIcon.Warning);
-
-            if (confirm == DialogResult.Yes)
-            {
-                try
-                {
-                    int id = int.Parse(txtTeamId.Text);
-
-                    // Извикваме Delete() от репозиторито
-                    _repo.Delete(id);
-
-                    MessageBox.Show("Отборът е изтрит успешно!");
-
-                    // Изчистваме текстовите полета
-                    txtName.Clear();
-                    txtCity.Clear();
-                    txtTeamId.Clear();
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Грешка при изтриване! Възможно е отборът да има свързани играчи.\nДетайли: " + ex.Message);
-                }
-            }
+        // ======================= ФИЛТРИ (СЪБИТИЯ) =======================
+        private void cboFilterTeam_SelectedIndexChanged(object sender, EventArgs e) => LoadPlayersData();
+        private void cboFilterPosition_SelectedIndexChanged(object sender, EventArgs e) => LoadPlayersData();
+        private void txtSearchName_TextChanged(object sender, EventArgs e) => LoadPlayersData();
+        private void btnClearFilters_Click(object sender, EventArgs e)
+        {
+            cboFilterTeam.SelectedIndex = 0;
+            cboFilterPosition.SelectedIndex = 0;
+            txtSearchName.Clear(); // <-- Този ред изчиства текстовото поле!
         }
     }
 }

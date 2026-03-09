@@ -6,7 +6,6 @@ namespace FootballProject
 {
     public class TeamsRepository
     {
-        // 1. LIST (Показване на всички)
         public List<Team> GetAll()
         {
             var teams = new List<Team>();
@@ -31,14 +30,12 @@ namespace FootballProject
             return teams;
         }
 
-        // 2. ADD (Добавяне)
         public void Add(Team team)
         {
             using (var conn = Db.GetConnection())
             {
                 conn.Open();
-                // Слагаме league_id = 1 твърдо кодирано, за да не нарушим Foreign Key, ако има такъв
-                string sql = "INSERT INTO Teams (name, city, league_id) VALUES (@name, @city, 1)";
+                string sql = "INSERT INTO Teams (name, city) VALUES (@name, @city)";
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@name", team.Name);
@@ -48,13 +45,12 @@ namespace FootballProject
             }
         }
 
-        // 3. EDIT (Редакция)
         public void Update(Team team)
         {
             using (var conn = Db.GetConnection())
             {
                 conn.Open();
-                string sql = "UPDATE Teams SET name = @name, city = @city WHERE team_id = @id";
+                string sql = "UPDATE Teams SET name=@name, city=@city WHERE team_id=@id";
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@name", team.Name);
@@ -65,16 +61,15 @@ namespace FootballProject
             }
         }
 
-        // 4. DELETE (Изтриване)
-        public void Delete(int teamId)
+        public void Delete(int id)
         {
             using (var conn = Db.GetConnection())
             {
                 conn.Open();
-                string sql = "DELETE FROM Teams WHERE team_id = @id";
+                string sql = "DELETE FROM Teams WHERE team_id=@id";
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", teamId);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }
