@@ -1,4 +1,4 @@
-USE football_mannager;
+USE football_manager;
 
 -- Добавяне на лига
 INSERT INTO Leagues (name) VALUES ('Premier League');
