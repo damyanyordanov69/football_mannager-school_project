@@ -96,8 +96,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Db.cs" />
+    <Compile Include="Models\League.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Transfer.cs" />
+    <Compile Include="Repositories\LeaguesRepository.cs" />
     <Compile Include="Repositories\PlayersRepository.cs" />
     <Compile Include="Repositories\TransfersRepository.cs" />
     <Compile Include="UI\Form1.cs">

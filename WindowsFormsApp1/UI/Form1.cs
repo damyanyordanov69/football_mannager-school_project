@@ -9,6 +9,7 @@ namespace FootballProject
         private TeamsRepository _teamsRepo = new TeamsRepository();
         private PlayersRepository _playersRepo = new PlayersRepository();
         private TransfersRepository _transfersRepo = new TransfersRepository();
+        private LeaguesRepository _leaguesRepo = new LeaguesRepository();
 
         public Form1()
         {
@@ -22,6 +23,7 @@ namespace FootballProject
             LoadPlayersData();
             LoadTransferDropdowns();
             LoadTransfersData();
+            LoadLeaguesData();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -38,6 +40,8 @@ namespace FootballProject
             // Зареждаме Трансферите и техните падащи менюта
             LoadTransferDropdowns();
             LoadTransfersData();
+
+            LoadLeaguesData();
         }
 
         // ======================= ТАБ 1: ОТБОРИ =======================
@@ -298,6 +302,133 @@ namespace FootballProject
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+
+        // ====================================================================
+        //                       ТАБ 4: ЛИГИ И УЧАСТНИЦИ
+        // ====================================================================
+
+        private void LoadLeaguesData()
+        {
+            try
+            {
+                dgvLeagues.DataSource = _leaguesRepo.GetAllLeagues();
+                dgvLeagues.ClearSelection();
+                txtLeagueId.Clear(); txtLeagueName.Clear(); txtLeagueSeason.Clear();
+
+                // Изчистваме дясната част, когато няма избрана лига
+                dgvParticipants.DataSource = null;
+                cboAvailableClubs.DataSource = null;
+            }
+            catch (Exception ex) { MessageBox.Show("Грешка при зареждане на лиги: " + ex.Message); }
+        }
+
+        // Когато кликнем на лига -> зареждаме участниците й в дясната таблица
+        private void dgvLeagues_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvLeagues.SelectedRows.Count > 0)
+            {
+                var league = (League)dgvLeagues.SelectedRows[0].DataBoundItem;
+                txtLeagueId.Text = league.LeagueId.ToString();
+                txtLeagueName.Text = league.Name;
+                txtLeagueSeason.Text = league.Season;
+
+                LoadParticipantsAndAvailableClubs(league.LeagueId);
+            }
+        }
+
+        private void LoadParticipantsAndAvailableClubs(int leagueId)
+        {
+            // Зареждаме тези, които вече са вътре
+            dgvParticipants.DataSource = _leaguesRepo.GetParticipants(leagueId);
+            dgvParticipants.ClearSelection();
+
+            // Зареждаме тези, които са свободни (в падащото меню)
+            var available = _leaguesRepo.GetAvailableClubs(leagueId);
+            cboAvailableClubs.DataSource = available;
+            cboAvailableClubs.DisplayMember = "Name";
+            cboAvailableClubs.ValueMember = "TeamId";
+        }
+
+        private bool ValidateLeague()
+        {
+            if (string.IsNullOrWhiteSpace(txtLeagueName.Text)) { MessageBox.Show("Името е задължително!"); return false; }
+
+            // Проверка за формат на сезона YYYY/YYYY
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtLeagueSeason.Text, @"^\d{4}/\d{4}$"))
+            {
+                MessageBox.Show("Сезонът трябва да е във формат YYYY/YYYY (напр. 2024/2025).");
+                return false;
+            }
+            return true;
+        }
+
+        private void btnAddLeague_Click(object sender, EventArgs e)
+        {
+            if (!ValidateLeague()) return;
+            try
+            {
+                _leaguesRepo.AddLeague(new League { Name = txtLeagueName.Text, Season = txtLeagueSeason.Text });
+                LoadLeaguesData();
+            }
+            catch (Exception ex) { MessageBox.Show("Грешка! Вероятно вече има такава лига за този сезон.\n" + ex.Message); }
+        }
+
+        private void btnEditLeague_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtLeagueId.Text) || !ValidateLeague()) return;
+            try
+            {
+                _leaguesRepo.UpdateLeague(new League { LeagueId = int.Parse(txtLeagueId.Text), Name = txtLeagueName.Text, Season = txtLeagueSeason.Text });
+                LoadLeaguesData();
+            }
+            catch (Exception ex) { MessageBox.Show("Грешка при редакция: " + ex.Message); }
+        }
+
+        private void btnDeleteLeague_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtLeagueId.Text)) return;
+            if (MessageBox.Show("Изтриване на лига?", "Потвърждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try { _leaguesRepo.DeleteLeague(int.Parse(txtLeagueId.Text)); LoadLeaguesData(); }
+                catch (Exception ex) { MessageBox.Show("Не може да се изтрие лига с отбори/мачове!\n" + ex.Message); }
+            }
+        }
+
+        // ДОБАВЯНЕ И ПРЕМАХВАНЕ НА УЧАСТНИЦИ
+        private void btnAddClubToLeague_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtLeagueId.Text)) { MessageBox.Show("Изберете лига първо!"); return; }
+            if (cboAvailableClubs.SelectedValue == null) { MessageBox.Show("Няма избрани свободни клубове!"); return; }
+
+            int leagueId = int.Parse(txtLeagueId.Text);
+            int teamId = (int)cboAvailableClubs.SelectedValue;
+
+            _leaguesRepo.AddClubToLeague(leagueId, teamId);
+            LoadParticipantsAndAvailableClubs(leagueId); // Презареждаме веднага дясната част
+        }
+
+        private void btnRemoveClubFromLeague_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtLeagueId.Text)) return;
+            if (dgvParticipants.SelectedRows.Count == 0) { MessageBox.Show("Изберете участник от дясната таблица за премахване!"); return; }
+
+            int leagueId = int.Parse(txtLeagueId.Text);
+            var team = (Team)dgvParticipants.SelectedRows[0].DataBoundItem;
+
+            if (MessageBox.Show($"Сигурни ли сте, че искате да премахнете {team.Name} от тази лига?", "Премахване", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try
+                {
+                    _leaguesRepo.RemoveClubFromLeague(leagueId, team.TeamId);
+                    LoadParticipantsAndAvailableClubs(leagueId); // Презареждаме веднага дясната част
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Бизнес правило", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
