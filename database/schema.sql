@@ -52,3 +52,16 @@ CREATE TABLE Transfers (
     FOREIGN KEY (from_team_id) REFERENCES Teams(team_id),
     FOREIGN KEY (to_team_id) REFERENCES Teams(team_id)
 );
+
+-- Обновяване на таблица Лиги (Добавяне на Сезон)
+ALTER TABLE Leagues ADD COLUMN IF NOT EXISTS season VARCHAR(9) NOT NULL DEFAULT '2023/2024';
+ALTER TABLE Leagues ADD CONSTRAINT unique_league_season UNIQUE (name, season);
+
+-- Свързваща таблица за Участниците (Много-към-много)
+CREATE TABLE IF NOT EXISTS league_teams (
+    league_id INT NOT NULL,
+    team_id INT NOT NULL,
+    PRIMARY KEY (league_id, team_id),
+    FOREIGN KEY (league_id) REFERENCES Leagues(league_id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES Teams(team_id) ON DELETE CASCADE
+);

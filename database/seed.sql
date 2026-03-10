@@ -39,3 +39,7 @@ VALUES (1, 1, 2, 500000.00, '2023-11-01');
 -- Nikolay Kolev се мести от Sharks FC (3) в Lions FC (1)
 INSERT INTO Transfers (player_id, from_team_id, to_team_id, transfer_fee, transfer_date)
 VALUES (5, 3, 1, 120000.00, '2023-11-15');
+
+-- Добавяне на примерни участници в лига с ID 1
+INSERT IGNORE INTO league_teams (league_id, team_id) VALUES 
+(1, 1), (1, 2), (1, 3);
