@@ -8,6 +8,7 @@ namespace FootballProject
     {
         private TeamsRepository _teamsRepo = new TeamsRepository();
         private PlayersRepository _playersRepo = new PlayersRepository();
+        private TransfersRepository _transfersRepo = new TransfersRepository();
 
         public Form1()
         {
@@ -19,6 +20,24 @@ namespace FootballProject
             LoadTeamsData();
             LoadPlayersDropdowns();
             LoadPlayersData();
+            LoadTransferDropdowns();
+            LoadTransfersData();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Този код се изпълнява ВСЕКИ ПЪТ, когато смениш таба!
+
+            // Зареждаме Отборите
+            LoadTeamsData();
+
+            // Зареждаме Играчите и техните падащи менюта
+            LoadPlayersDropdowns();
+            LoadPlayersData();
+
+            // Зареждаме Трансферите и техните падащи менюта
+            LoadTransferDropdowns();
+            LoadTransfersData();
         }
 
         // ======================= ТАБ 1: ОТБОРИ =======================
@@ -180,6 +199,107 @@ namespace FootballProject
             cboFilterTeam.SelectedIndex = 0;
             cboFilterPosition.SelectedIndex = 0;
             txtSearchName.Clear(); // <-- Този ред изчиства текстовото поле!
+        }
+
+
+
+
+        // ====================================================================
+        //                       ТАБ 3: ТРАНСФЕРИ
+        // ====================================================================
+
+        private void LoadTransferDropdowns()
+        {
+            var teams = _teamsRepo.GetAll();
+
+            // Филтър за историята
+            var filterTeams = new List<Team> { new Team { TeamId = 0, Name = "Всички" } };
+            filterTeams.AddRange(teams);
+            cboFilterTransferTeam.DataSource = filterTeams;
+            cboFilterTransferTeam.DisplayMember = "Name";
+            cboFilterTransferTeam.ValueMember = "TeamId";
+
+            // Отбори за "Към клуб"
+            cboTransferToTeam.DataSource = new List<Team>(teams);
+            cboTransferToTeam.DisplayMember = "Name";
+            cboTransferToTeam.ValueMember = "TeamId";
+
+            // Играчи за трансфер
+            var players = _playersRepo.GetPlayers();
+            cboTransferPlayer.DataSource = players;
+            cboTransferPlayer.DisplayMember = "FullName"; // Ползваме новото свойство от Player.cs!
+        }
+
+        private void LoadTransfersData()
+        {
+            try
+            {
+                int? teamId = cboFilterTransferTeam.SelectedValue as int?;
+                dgvTransfers.DataSource = _transfersRepo.GetTransfers(teamId);
+
+                // Скриваме ID колоните за красота
+                if (dgvTransfers.Columns.Contains("PlayerId")) dgvTransfers.Columns["PlayerId"].Visible = false;
+                if (dgvTransfers.Columns.Contains("FromTeamId")) dgvTransfers.Columns["FromTeamId"].Visible = false;
+                if (dgvTransfers.Columns.Contains("ToTeamId")) dgvTransfers.Columns["ToTeamId"].Visible = false;
+            }
+            catch { }
+        }
+
+        // Когато изберем играч от падащото меню, автоматично показваме текущия му отбор
+        private void cboTransferPlayer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboTransferPlayer.SelectedItem is Player selectedPlayer)
+            {
+                txtCurrentTeam.Text = selectedPlayer.TeamName;
+            }
+        }
+
+        // Филтър история
+        private void cboFilterTransferTeam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadTransfersData();
+        }
+
+        // Самият трансфер!
+        private void btnMakeTransfer_Click(object sender, EventArgs e)
+        {
+            if (cboTransferPlayer.SelectedItem is Player p && cboTransferToTeam.SelectedValue != null)
+            {
+                int toTeamId = (int)cboTransferToTeam.SelectedValue;
+
+                // ВАЛИДАЦИЯ 1: Не към същия клуб!
+                if (p.TeamId == toTeamId)
+                {
+                    MessageBox.Show("Грешка: Играчът вече играе в този клуб! Не може да се трансферира в същия клуб.", "Бизнес правило", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // ВАЛИДАЦИЯ 2: Сумата
+                decimal fee = numTransferFee.Value;
+                if (fee < 0)
+                {
+                    MessageBox.Show("Сумата не може да бъде отрицателна!");
+                    return;
+                }
+
+                try
+                {
+                    // Правим трансфера (Транзакцията)
+                    _transfersRepo.PerformTransfer(p.PlayerId, p.TeamId, toTeamId, fee, dtpTransferDate.Value);
+                    MessageBox.Show("Успешен трансфер! Играчът смени отбора си.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Презареждаме ВСИЧКО, защото данните са се променили!
+                    LoadTransfersData();
+                    LoadPlayersData();
+                    LoadTransferDropdowns();
+
+                    numTransferFee.Value = 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

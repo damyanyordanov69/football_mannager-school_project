@@ -63,11 +63,33 @@
             this.txtSearchName = new System.Windows.Forms.TextBox();
             this.cboFilterPosition = new System.Windows.Forms.ComboBox();
             this.cboFilterTeam = new System.Windows.Forms.ComboBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.cboFilterTransferTeam = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dgvTransfers = new System.Windows.Forms.DataGridView();
+            this.cboTransferPlayer = new System.Windows.Forms.ComboBox();
+            this.cboTransferToTeam = new System.Windows.Forms.ComboBox();
+            this.txtCurrentTeam = new System.Windows.Forms.TextBox();
+            this.numTransferFee = new System.Windows.Forms.NumericUpDown();
+            this.dtpTransferDate = new System.Windows.Forms.DateTimePicker();
+            this.btnMakeTransfer = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeams)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTransfers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTransferFee)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvTeams
@@ -80,12 +102,13 @@
             this.dgvTeams.RowHeadersWidth = 51;
             this.dgvTeams.RowTemplate.Height = 24;
             this.dgvTeams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTeams.Size = new System.Drawing.Size(776, 372);
+            this.dgvTeams.Size = new System.Drawing.Size(776, 351);
             this.dgvTeams.TabIndex = 0;
             this.dgvTeams.SelectionChanged += new System.EventHandler(this.dgvTeams_SelectionChanged);
             // 
             // txtTeamId
             // 
+            this.txtTeamId.Enabled = false;
             this.txtTeamId.Location = new System.Drawing.Point(1, 376);
             this.txtTeamId.Margin = new System.Windows.Forms.Padding(2);
             this.txtTeamId.Name = "txtTeamId";
@@ -146,14 +169,19 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(-1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(801, 448);
             this.tabControl1.TabIndex = 7;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label20);
+            this.tabPage1.Controls.Add(this.label19);
+            this.tabPage1.Controls.Add(this.label18);
             this.tabPage1.Controls.Add(this.btnAddTeam);
             this.tabPage1.Controls.Add(this.dgvTeams);
             this.tabPage1.Controls.Add(this.txtTeamCity);
@@ -441,6 +469,207 @@
             this.cboFilterTeam.TabIndex = 0;
             this.cboFilterTeam.SelectedIndexChanged += new System.EventHandler(this.cboFilterTeam_SelectedIndexChanged);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label17);
+            this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.label15);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.btnMakeTransfer);
+            this.tabPage3.Controls.Add(this.dtpTransferDate);
+            this.tabPage3.Controls.Add(this.numTransferFee);
+            this.tabPage3.Controls.Add(this.txtCurrentTeam);
+            this.tabPage3.Controls.Add(this.cboTransferToTeam);
+            this.tabPage3.Controls.Add(this.cboTransferPlayer);
+            this.tabPage3.Controls.Add(this.dgvTransfers);
+            this.tabPage3.Controls.Add(this.label12);
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.cboFilterTransferTeam);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(793, 422);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Трансфери";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // cboFilterTransferTeam
+            // 
+            this.cboFilterTransferTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFilterTransferTeam.FormattingEnabled = true;
+            this.cboFilterTransferTeam.Location = new System.Drawing.Point(73, 29);
+            this.cboFilterTransferTeam.Name = "cboFilterTransferTeam";
+            this.cboFilterTransferTeam.Size = new System.Drawing.Size(121, 21);
+            this.cboFilterTransferTeam.TabIndex = 0;
+            this.cboFilterTransferTeam.SelectedIndexChanged += new System.EventHandler(this.cboFilterTransferTeam_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label11.Location = new System.Drawing.Point(3, 29);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(64, 17);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Филтри:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label12.Location = new System.Drawing.Point(70, 13);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(120, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "По трансферен отбор:";
+            // 
+            // dgvTransfers
+            // 
+            this.dgvTransfers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTransfers.Location = new System.Drawing.Point(0, 56);
+            this.dgvTransfers.Name = "dgvTransfers";
+            this.dgvTransfers.ReadOnly = true;
+            this.dgvTransfers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTransfers.Size = new System.Drawing.Size(793, 313);
+            this.dgvTransfers.TabIndex = 3;
+            // 
+            // cboTransferPlayer
+            // 
+            this.cboTransferPlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTransferPlayer.FormattingEnabled = true;
+            this.cboTransferPlayer.Location = new System.Drawing.Point(9, 392);
+            this.cboTransferPlayer.Name = "cboTransferPlayer";
+            this.cboTransferPlayer.Size = new System.Drawing.Size(121, 21);
+            this.cboTransferPlayer.TabIndex = 4;
+            this.cboTransferPlayer.SelectedIndexChanged += new System.EventHandler(this.cboTransferPlayer_SelectedIndexChanged);
+            // 
+            // cboTransferToTeam
+            // 
+            this.cboTransferToTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTransferToTeam.FormattingEnabled = true;
+            this.cboTransferToTeam.Location = new System.Drawing.Point(263, 393);
+            this.cboTransferToTeam.Name = "cboTransferToTeam";
+            this.cboTransferToTeam.Size = new System.Drawing.Size(121, 21);
+            this.cboTransferToTeam.TabIndex = 5;
+            // 
+            // txtCurrentTeam
+            // 
+            this.txtCurrentTeam.Enabled = false;
+            this.txtCurrentTeam.Location = new System.Drawing.Point(136, 393);
+            this.txtCurrentTeam.Name = "txtCurrentTeam";
+            this.txtCurrentTeam.ReadOnly = true;
+            this.txtCurrentTeam.Size = new System.Drawing.Size(121, 20);
+            this.txtCurrentTeam.TabIndex = 6;
+            // 
+            // numTransferFee
+            // 
+            this.numTransferFee.Location = new System.Drawing.Point(390, 394);
+            this.numTransferFee.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.numTransferFee.Name = "numTransferFee";
+            this.numTransferFee.Size = new System.Drawing.Size(57, 20);
+            this.numTransferFee.TabIndex = 7;
+            // 
+            // dtpTransferDate
+            // 
+            this.dtpTransferDate.Location = new System.Drawing.Point(453, 394);
+            this.dtpTransferDate.Name = "dtpTransferDate";
+            this.dtpTransferDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpTransferDate.TabIndex = 8;
+            // 
+            // btnMakeTransfer
+            // 
+            this.btnMakeTransfer.Location = new System.Drawing.Point(659, 375);
+            this.btnMakeTransfer.Name = "btnMakeTransfer";
+            this.btnMakeTransfer.Size = new System.Drawing.Size(125, 39);
+            this.btnMakeTransfer.TabIndex = 9;
+            this.btnMakeTransfer.Text = "Финализирай Трансфер";
+            this.btnMakeTransfer.UseVisualStyleBackColor = true;
+            this.btnMakeTransfer.Click += new System.EventHandler(this.btnMakeTransfer_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label13.Location = new System.Drawing.Point(9, 376);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(44, 15);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Играч:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label14.Location = new System.Drawing.Point(450, 375);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(126, 15);
+            this.label14.TabIndex = 11;
+            this.label14.Text = "Дата на трансфера:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label15.Location = new System.Drawing.Point(387, 375);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(39, 15);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Сума:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label16.Location = new System.Drawing.Point(260, 375);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(71, 15);
+            this.label16.TabIndex = 13;
+            this.label16.Text = "Нов отбор:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label17.Location = new System.Drawing.Point(133, 375);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(82, 15);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "Текущ отбор:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label18.Location = new System.Drawing.Point(-2, 359);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(22, 15);
+            this.label18.TabIndex = 7;
+            this.label18.Text = "ID:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label19.Location = new System.Drawing.Point(300, 359);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(38, 15);
+            this.label19.TabIndex = 8;
+            this.label19.Text = "Град:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label20.Location = new System.Drawing.Point(149, 359);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(47, 15);
+            this.label20.TabIndex = 9;
+            this.label20.Text = "Отбор:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -458,6 +687,10 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTransfers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTransferFee)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -499,6 +732,25 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ComboBox cboFilterTransferTeam;
+        private System.Windows.Forms.Button btnMakeTransfer;
+        private System.Windows.Forms.DateTimePicker dtpTransferDate;
+        private System.Windows.Forms.NumericUpDown numTransferFee;
+        private System.Windows.Forms.TextBox txtCurrentTeam;
+        private System.Windows.Forms.ComboBox cboTransferToTeam;
+        private System.Windows.Forms.ComboBox cboTransferPlayer;
+        private System.Windows.Forms.DataGridView dgvTransfers;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
     }
 }
 

@@ -10,6 +10,7 @@ namespace FootballProject
         public DateTime BirthDate { get; set; }
         public string Position { get; set; }
         public int TeamId { get; set; }
-        public string TeamName { get; set; } // За да показваме името на отбора в таблицата
+        public string TeamName { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
     }
 }
