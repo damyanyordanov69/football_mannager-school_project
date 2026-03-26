@@ -1,45 +1,40 @@
 USE football_manager;
 
--- Добавяне на лига
-INSERT INTO Leagues (name) VALUES ('Premier League');
+-- Добавяне на 6 примерни отбора
+INSERT INTO Teams (name, city) VALUES 
+('Левски', 'София'),
+('ЦСКА-София', 'София'),
+('Лудогорец', 'Разград'),
+('Ботев', 'Пловдив'),
+('Черно море', 'Варна'),
+('Локомотив', 'Пловдив');
 
--- Добавяне на отбори
-INSERT INTO Teams (name, city, league_id) VALUES 
-('Lions FC', 'Sofia', 1),
-('Eagles United', 'Plovdiv', 1),
-('Sharks FC', 'Varna', 1),
-('Dragons', 'Ruse', 1);
+-- Добавяне на 2 примерни лиги
+INSERT INTO Leagues (name, season) VALUES 
+('Първа професионална лига', '2023/2024'),
+('Втора лига', '2023/2024');
 
--- Добавяне на играчи (ОБНОВЕНИ с дата на раждане и позиция спрямо новата таблица)
+-- Добавяне на 10 примерни играчи (разпределени по отборите)
 INSERT INTO Players (first_name, last_name, birth_date, position, team_id) VALUES 
-('Ivan', 'Ivanov', '1998-05-14', 'FW', 1), 
-('Georgi', 'Petrov', '2001-08-22', 'MF', 1),
-('Stefan', 'Stoianov', '1995-10-10', 'DF', 2), 
-('Dimitar', 'Berbatov', '1988-01-30', 'FW', 2),
-('Nikolay', 'Kolev', '2002-07-07', 'MF', 3), 
-('Hristo', 'Stoichkov', '1983-02-08', 'FW', 3),
-('Petar', 'Zanev', '1999-12-01', 'DF', 4), 
-('Martin', 'Petrov', '1993-01-15', 'MF', 4),
--- Добавени още 2 играчи, за да станат общо 10 (според изискванията на учителя)
-('Dimitar', 'Iliev', '1990-05-05', 'GK', 1),
-('Nikolay', 'Mihaylov', '1988-08-12', 'GK', 2);
+('Иван', 'Иванов', '1998-05-14', 'FW', 1), 
+('Георги', 'Петров', '2001-08-22', 'MF', 1),
+('Димитър', 'Илиев', '1990-05-05', 'GK', 1),
+('Стефан', 'Стоянов', '1995-10-10', 'DF', 2), 
+('Димитър', 'Бербатов', '1988-01-30', 'FW', 2),
+('Николай', 'Михайлов', '1988-08-12', 'GK', 2),
+('Кирил', 'Десподов', '1996-11-11', 'FW', 3),
+('Антон', 'Недялков', '1993-04-30', 'DF', 3),
+('Тодор', 'Неделев', '1993-02-07', 'MF', 4),
+('Илиан', 'Илиев', '1999-08-20', 'MF', 5);
 
--- Добавяне на мачове
-INSERT INTO Matches (home_team_id, away_team_id, home_score, away_score, match_date) 
-VALUES (1, 2, 2, 1, '2023-10-01');
+-- Добавяне на няколко исторически трансфера (Етап 4)
+INSERT INTO Transfers (player_id, from_team_id, to_team_id, transfer_fee, transfer_date) VALUES 
+(7, 2, 3, 500000.00, '2022-07-01'),
+(9, 4, 3, 300000.00, '2023-01-15');
 
-INSERT INTO Matches (home_team_id, away_team_id, home_score, away_score, match_date) 
-VALUES (3, 4, 0, 0, '2023-10-05');
+-- Записване на всички 6 отбора като участници в "Първа лига" (Етап 5)
+INSERT INTO league_teams (league_id, team_id) VALUES 
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6);
 
--- НОВИ ЗАПИСИ: Трансфери
--- Ivan Ivanov се мести от Lions FC (1) в Eagles United (2)
-INSERT INTO Transfers (player_id, from_team_id, to_team_id, transfer_fee, transfer_date)
-VALUES (1, 1, 2, 500000.00, '2023-11-01');
-
--- Nikolay Kolev се мести от Sharks FC (3) в Lions FC (1)
-INSERT INTO Transfers (player_id, from_team_id, to_team_id, transfer_fee, transfer_date)
-VALUES (5, 3, 1, 120000.00, '2023-11-15');
-
--- Добавяне на примерни участници в лига с ID 1
-INSERT IGNORE INTO league_teams (league_id, team_id) VALUES 
-(1, 1), (1, 2), (1, 3);
+-- Забележка: Нарочно не добавяме мачове тук. Мачовете ще се генерират автоматично 
+-- чрез бутоните в C# програмата (Етап 6).
