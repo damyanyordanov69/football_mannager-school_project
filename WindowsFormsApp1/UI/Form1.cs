@@ -10,6 +10,7 @@ namespace FootballProject
         private PlayersRepository _playersRepo = new PlayersRepository();
         private TransfersRepository _transfersRepo = new TransfersRepository();
         private LeaguesRepository _leaguesRepo = new LeaguesRepository();
+        private MatchesRepository _matchesRepo = new MatchesRepository();
 
         public Form1()
         {
@@ -24,6 +25,7 @@ namespace FootballProject
             LoadTransferDropdowns();
             LoadTransfersData();
             LoadLeaguesData();
+            LoadScheduleDropdown();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -429,6 +431,79 @@ namespace FootballProject
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Бизнес правило", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        // ====================================================================
+        //                       ТАБ 5: ПРОГРАМА (МАЧОВЕ)
+        // ====================================================================
+
+        private void LoadScheduleDropdown()
+        {
+            var leagues = _leaguesRepo.GetAllLeagues();
+
+            // Първо казваме кои са полетата за Име и ID!
+            cboScheduleLeague.DisplayMember = "Name";
+            cboScheduleLeague.ValueMember = "LeagueId";
+
+            // ЧАК ТОГАВА му даваме данните (за да не гърми)
+            cboScheduleLeague.DataSource = leagues;
+        }
+
+        private void cboScheduleLeague_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadMatches();
+        }
+
+        private void LoadMatches()
+        {
+            if (cboScheduleLeague.SelectedValue == null) return;
+
+            try
+            {
+                int leagueId = (int)cboScheduleLeague.SelectedValue;
+                var matches = _matchesRepo.GetMatches(leagueId);
+
+                dgvMatches.DataSource = matches;
+
+                // Скриваме излишните ID-та за по-красив изглед
+                if (dgvMatches.Columns.Contains("LeagueId")) dgvMatches.Columns["LeagueId"].Visible = false;
+                if (dgvMatches.Columns.Contains("HomeTeamId")) dgvMatches.Columns["HomeTeamId"].Visible = false;
+                if (dgvMatches.Columns.Contains("AwayTeamId")) dgvMatches.Columns["AwayTeamId"].Visible = false;
+
+                dgvMatches.ClearSelection();
+            }
+            catch (Exception ex) { MessageBox.Show("Грешка при зареждане на мачове: " + ex.Message); }
+        }
+
+        private void btnGenerateSingle_Click(object sender, EventArgs e)
+        {
+            GenerateTournament(false);
+        }
+
+        private void btnGenerateDouble_Click(object sender, EventArgs e)
+        {
+            GenerateTournament(true);
+        }
+
+        private void GenerateTournament(bool isDouble)
+        {
+            if (cboScheduleLeague.SelectedValue == null) { MessageBox.Show("Моля, изберете първенство!"); return; }
+
+            int leagueId = (int)cboScheduleLeague.SelectedValue;
+
+            if (MessageBox.Show("Сигурни ли сте, че искате да генерирате програма? Това действие не може да бъде отменено.", "Потвърждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    _matchesRepo.GenerateSchedule(leagueId, isDouble);
+                    MessageBox.Show("Програмата беше генерирана успешно!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadMatches(); // Презареждаме таблицата, за да видим мачовете
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }

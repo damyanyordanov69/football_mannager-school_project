@@ -37,6 +37,9 @@
             this.btnDeleteTeam = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -64,53 +67,57 @@
             this.cboFilterPosition = new System.Windows.Forms.ComboBox();
             this.cboFilterTeam = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.cboFilterTransferTeam = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.dgvTransfers = new System.Windows.Forms.DataGridView();
-            this.cboTransferPlayer = new System.Windows.Forms.ComboBox();
-            this.cboTransferToTeam = new System.Windows.Forms.ComboBox();
-            this.txtCurrentTeam = new System.Windows.Forms.TextBox();
-            this.numTransferFee = new System.Windows.Forms.NumericUpDown();
-            this.dtpTransferDate = new System.Windows.Forms.DateTimePicker();
-            this.btnMakeTransfer = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnMakeTransfer = new System.Windows.Forms.Button();
+            this.dtpTransferDate = new System.Windows.Forms.DateTimePicker();
+            this.numTransferFee = new System.Windows.Forms.NumericUpDown();
+            this.txtCurrentTeam = new System.Windows.Forms.TextBox();
+            this.cboTransferToTeam = new System.Windows.Forms.ComboBox();
+            this.cboTransferPlayer = new System.Windows.Forms.ComboBox();
+            this.dgvTransfers = new System.Windows.Forms.DataGridView();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cboFilterTransferTeam = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dgvLeagues = new System.Windows.Forms.DataGridView();
-            this.txtLeagueId = new System.Windows.Forms.TextBox();
-            this.txtLeagueSeason = new System.Windows.Forms.TextBox();
-            this.txtLeagueName = new System.Windows.Forms.TextBox();
-            this.btnAddLeague = new System.Windows.Forms.Button();
-            this.btnEditLeague = new System.Windows.Forms.Button();
-            this.btnDeleteLeague = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.dgvParticipants = new System.Windows.Forms.DataGridView();
-            this.cboAvailableClubs = new System.Windows.Forms.ComboBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.btnRemoveClubFromLeague = new System.Windows.Forms.Button();
             this.btnAddClubToLeague = new System.Windows.Forms.Button();
+            this.btnRemoveClubFromLeague = new System.Windows.Forms.Button();
+            this.label26 = new System.Windows.Forms.Label();
+            this.cboAvailableClubs = new System.Windows.Forms.ComboBox();
+            this.dgvParticipants = new System.Windows.Forms.DataGridView();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.btnDeleteLeague = new System.Windows.Forms.Button();
+            this.btnEditLeague = new System.Windows.Forms.Button();
+            this.btnAddLeague = new System.Windows.Forms.Button();
+            this.txtLeagueName = new System.Windows.Forms.TextBox();
+            this.txtLeagueSeason = new System.Windows.Forms.TextBox();
+            this.txtLeagueId = new System.Windows.Forms.TextBox();
+            this.dgvLeagues = new System.Windows.Forms.DataGridView();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.cboScheduleLeague = new System.Windows.Forms.ComboBox();
+            this.dgvMatches = new System.Windows.Forms.DataGridView();
+            this.btnGenerateSingle = new System.Windows.Forms.Button();
+            this.btnGenerateDouble = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeams)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTransfers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTransferFee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTransfers)).BeginInit();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLeagues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParticipants)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLeagues)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMatches)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvTeams
@@ -192,6 +199,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(-1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -218,6 +226,36 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Отбори";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label20.Location = new System.Drawing.Point(149, 359);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(47, 15);
+            this.label20.TabIndex = 9;
+            this.label20.Text = "Отбор:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label19.Location = new System.Drawing.Point(300, 359);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(38, 15);
+            this.label19.TabIndex = 8;
+            this.label19.Text = "Град:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label18.Location = new System.Drawing.Point(-2, 359);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(22, 15);
+            this.label18.TabIndex = 7;
+            this.label18.Text = "ID:";
             // 
             // tabPage2
             // 
@@ -515,73 +553,72 @@
             this.tabPage3.Text = "Трансфери";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // cboFilterTransferTeam
+            // label17
             // 
-            this.cboFilterTransferTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFilterTransferTeam.FormattingEnabled = true;
-            this.cboFilterTransferTeam.Location = new System.Drawing.Point(73, 29);
-            this.cboFilterTransferTeam.Name = "cboFilterTransferTeam";
-            this.cboFilterTransferTeam.Size = new System.Drawing.Size(121, 21);
-            this.cboFilterTransferTeam.TabIndex = 0;
-            this.cboFilterTransferTeam.SelectedIndexChanged += new System.EventHandler(this.cboFilterTransferTeam_SelectedIndexChanged);
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label17.Location = new System.Drawing.Point(133, 375);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(82, 15);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "Текущ отбор:";
             // 
-            // label11
+            // label16
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label11.Location = new System.Drawing.Point(3, 29);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 17);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Филтри:";
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label16.Location = new System.Drawing.Point(260, 375);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(71, 15);
+            this.label16.TabIndex = 13;
+            this.label16.Text = "Нов отбор:";
             // 
-            // label12
+            // label15
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label12.Location = new System.Drawing.Point(70, 13);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(120, 13);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "По трансферен отбор:";
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label15.Location = new System.Drawing.Point(387, 375);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(39, 15);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Сума:";
             // 
-            // dgvTransfers
+            // label14
             // 
-            this.dgvTransfers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTransfers.Location = new System.Drawing.Point(0, 56);
-            this.dgvTransfers.Name = "dgvTransfers";
-            this.dgvTransfers.ReadOnly = true;
-            this.dgvTransfers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTransfers.Size = new System.Drawing.Size(793, 313);
-            this.dgvTransfers.TabIndex = 3;
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label14.Location = new System.Drawing.Point(450, 375);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(126, 15);
+            this.label14.TabIndex = 11;
+            this.label14.Text = "Дата на трансфера:";
             // 
-            // cboTransferPlayer
+            // label13
             // 
-            this.cboTransferPlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTransferPlayer.FormattingEnabled = true;
-            this.cboTransferPlayer.Location = new System.Drawing.Point(9, 392);
-            this.cboTransferPlayer.Name = "cboTransferPlayer";
-            this.cboTransferPlayer.Size = new System.Drawing.Size(121, 21);
-            this.cboTransferPlayer.TabIndex = 4;
-            this.cboTransferPlayer.SelectedIndexChanged += new System.EventHandler(this.cboTransferPlayer_SelectedIndexChanged);
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label13.Location = new System.Drawing.Point(9, 376);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(44, 15);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Играч:";
             // 
-            // cboTransferToTeam
+            // btnMakeTransfer
             // 
-            this.cboTransferToTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTransferToTeam.FormattingEnabled = true;
-            this.cboTransferToTeam.Location = new System.Drawing.Point(263, 393);
-            this.cboTransferToTeam.Name = "cboTransferToTeam";
-            this.cboTransferToTeam.Size = new System.Drawing.Size(121, 21);
-            this.cboTransferToTeam.TabIndex = 5;
+            this.btnMakeTransfer.Location = new System.Drawing.Point(659, 375);
+            this.btnMakeTransfer.Name = "btnMakeTransfer";
+            this.btnMakeTransfer.Size = new System.Drawing.Size(125, 39);
+            this.btnMakeTransfer.TabIndex = 9;
+            this.btnMakeTransfer.Text = "Финализирай Трансфер";
+            this.btnMakeTransfer.UseVisualStyleBackColor = true;
+            this.btnMakeTransfer.Click += new System.EventHandler(this.btnMakeTransfer_Click);
             // 
-            // txtCurrentTeam
+            // dtpTransferDate
             // 
-            this.txtCurrentTeam.Enabled = false;
-            this.txtCurrentTeam.Location = new System.Drawing.Point(136, 393);
-            this.txtCurrentTeam.Name = "txtCurrentTeam";
-            this.txtCurrentTeam.ReadOnly = true;
-            this.txtCurrentTeam.Size = new System.Drawing.Size(121, 20);
-            this.txtCurrentTeam.TabIndex = 6;
+            this.dtpTransferDate.Location = new System.Drawing.Point(453, 394);
+            this.dtpTransferDate.Name = "dtpTransferDate";
+            this.dtpTransferDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpTransferDate.TabIndex = 8;
             // 
             // numTransferFee
             // 
@@ -595,102 +632,73 @@
             this.numTransferFee.Size = new System.Drawing.Size(57, 20);
             this.numTransferFee.TabIndex = 7;
             // 
-            // dtpTransferDate
+            // txtCurrentTeam
             // 
-            this.dtpTransferDate.Location = new System.Drawing.Point(453, 394);
-            this.dtpTransferDate.Name = "dtpTransferDate";
-            this.dtpTransferDate.Size = new System.Drawing.Size(200, 20);
-            this.dtpTransferDate.TabIndex = 8;
+            this.txtCurrentTeam.Enabled = false;
+            this.txtCurrentTeam.Location = new System.Drawing.Point(136, 393);
+            this.txtCurrentTeam.Name = "txtCurrentTeam";
+            this.txtCurrentTeam.ReadOnly = true;
+            this.txtCurrentTeam.Size = new System.Drawing.Size(121, 20);
+            this.txtCurrentTeam.TabIndex = 6;
             // 
-            // btnMakeTransfer
+            // cboTransferToTeam
             // 
-            this.btnMakeTransfer.Location = new System.Drawing.Point(659, 375);
-            this.btnMakeTransfer.Name = "btnMakeTransfer";
-            this.btnMakeTransfer.Size = new System.Drawing.Size(125, 39);
-            this.btnMakeTransfer.TabIndex = 9;
-            this.btnMakeTransfer.Text = "Финализирай Трансфер";
-            this.btnMakeTransfer.UseVisualStyleBackColor = true;
-            this.btnMakeTransfer.Click += new System.EventHandler(this.btnMakeTransfer_Click);
+            this.cboTransferToTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTransferToTeam.FormattingEnabled = true;
+            this.cboTransferToTeam.Location = new System.Drawing.Point(263, 393);
+            this.cboTransferToTeam.Name = "cboTransferToTeam";
+            this.cboTransferToTeam.Size = new System.Drawing.Size(121, 21);
+            this.cboTransferToTeam.TabIndex = 5;
             // 
-            // label13
+            // cboTransferPlayer
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label13.Location = new System.Drawing.Point(9, 376);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(44, 15);
-            this.label13.TabIndex = 10;
-            this.label13.Text = "Играч:";
+            this.cboTransferPlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTransferPlayer.FormattingEnabled = true;
+            this.cboTransferPlayer.Location = new System.Drawing.Point(9, 392);
+            this.cboTransferPlayer.Name = "cboTransferPlayer";
+            this.cboTransferPlayer.Size = new System.Drawing.Size(121, 21);
+            this.cboTransferPlayer.TabIndex = 4;
+            this.cboTransferPlayer.SelectedIndexChanged += new System.EventHandler(this.cboTransferPlayer_SelectedIndexChanged);
             // 
-            // label14
+            // dgvTransfers
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label14.Location = new System.Drawing.Point(450, 375);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(126, 15);
-            this.label14.TabIndex = 11;
-            this.label14.Text = "Дата на трансфера:";
+            this.dgvTransfers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTransfers.Location = new System.Drawing.Point(0, 56);
+            this.dgvTransfers.Name = "dgvTransfers";
+            this.dgvTransfers.ReadOnly = true;
+            this.dgvTransfers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTransfers.Size = new System.Drawing.Size(793, 313);
+            this.dgvTransfers.TabIndex = 3;
             // 
-            // label15
+            // label12
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label15.Location = new System.Drawing.Point(387, 375);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(39, 15);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Сума:";
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label12.Location = new System.Drawing.Point(70, 13);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(120, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "По трансферен отбор:";
             // 
-            // label16
+            // label11
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label16.Location = new System.Drawing.Point(260, 375);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(71, 15);
-            this.label16.TabIndex = 13;
-            this.label16.Text = "Нов отбор:";
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label11.Location = new System.Drawing.Point(3, 29);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(64, 17);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Филтри:";
             // 
-            // label17
+            // cboFilterTransferTeam
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label17.Location = new System.Drawing.Point(133, 375);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(82, 15);
-            this.label17.TabIndex = 14;
-            this.label17.Text = "Текущ отбор:";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label18.Location = new System.Drawing.Point(-2, 359);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(22, 15);
-            this.label18.TabIndex = 7;
-            this.label18.Text = "ID:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label19.Location = new System.Drawing.Point(300, 359);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(38, 15);
-            this.label19.TabIndex = 8;
-            this.label19.Text = "Град:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label20.Location = new System.Drawing.Point(149, 359);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(47, 15);
-            this.label20.TabIndex = 9;
-            this.label20.Text = "Отбор:";
+            this.cboFilterTransferTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFilterTransferTeam.FormattingEnabled = true;
+            this.cboFilterTransferTeam.Location = new System.Drawing.Point(73, 29);
+            this.cboFilterTransferTeam.Name = "cboFilterTransferTeam";
+            this.cboFilterTransferTeam.Size = new System.Drawing.Size(121, 21);
+            this.cboFilterTransferTeam.TabIndex = 0;
+            this.cboFilterTransferTeam.SelectedIndexChanged += new System.EventHandler(this.cboFilterTransferTeam_SelectedIndexChanged);
             // 
             // tabPage4
             // 
@@ -718,148 +726,15 @@
             this.tabPage4.Text = "Лиги";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // dgvLeagues
+            // btnAddClubToLeague
             // 
-            this.dgvLeagues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLeagues.Location = new System.Drawing.Point(0, 23);
-            this.dgvLeagues.Name = "dgvLeagues";
-            this.dgvLeagues.ReadOnly = true;
-            this.dgvLeagues.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLeagues.Size = new System.Drawing.Size(360, 326);
-            this.dgvLeagues.TabIndex = 0;
-            this.dgvLeagues.SelectionChanged += new System.EventHandler(this.dgvLeagues_SelectionChanged);
-            // 
-            // txtLeagueId
-            // 
-            this.txtLeagueId.Enabled = false;
-            this.txtLeagueId.Location = new System.Drawing.Point(3, 370);
-            this.txtLeagueId.Name = "txtLeagueId";
-            this.txtLeagueId.ReadOnly = true;
-            this.txtLeagueId.Size = new System.Drawing.Size(100, 20);
-            this.txtLeagueId.TabIndex = 1;
-            // 
-            // txtLeagueSeason
-            // 
-            this.txtLeagueSeason.Location = new System.Drawing.Point(215, 370);
-            this.txtLeagueSeason.Name = "txtLeagueSeason";
-            this.txtLeagueSeason.Size = new System.Drawing.Size(100, 20);
-            this.txtLeagueSeason.TabIndex = 2;
-            // 
-            // txtLeagueName
-            // 
-            this.txtLeagueName.Location = new System.Drawing.Point(109, 370);
-            this.txtLeagueName.Name = "txtLeagueName";
-            this.txtLeagueName.Size = new System.Drawing.Size(100, 20);
-            this.txtLeagueName.TabIndex = 4;
-            // 
-            // btnAddLeague
-            // 
-            this.btnAddLeague.Location = new System.Drawing.Point(3, 396);
-            this.btnAddLeague.Name = "btnAddLeague";
-            this.btnAddLeague.Size = new System.Drawing.Size(100, 23);
-            this.btnAddLeague.TabIndex = 5;
-            this.btnAddLeague.Text = "Добави";
-            this.btnAddLeague.UseVisualStyleBackColor = true;
-            this.btnAddLeague.Click += new System.EventHandler(this.btnAddLeague_Click);
-            // 
-            // btnEditLeague
-            // 
-            this.btnEditLeague.Location = new System.Drawing.Point(109, 396);
-            this.btnEditLeague.Name = "btnEditLeague";
-            this.btnEditLeague.Size = new System.Drawing.Size(100, 23);
-            this.btnEditLeague.TabIndex = 6;
-            this.btnEditLeague.Text = "Редактирай";
-            this.btnEditLeague.UseVisualStyleBackColor = true;
-            this.btnEditLeague.Click += new System.EventHandler(this.btnEditLeague_Click);
-            // 
-            // btnDeleteLeague
-            // 
-            this.btnDeleteLeague.Location = new System.Drawing.Point(215, 396);
-            this.btnDeleteLeague.Name = "btnDeleteLeague";
-            this.btnDeleteLeague.Size = new System.Drawing.Size(100, 23);
-            this.btnDeleteLeague.TabIndex = 7;
-            this.btnDeleteLeague.Text = "Изтрий";
-            this.btnDeleteLeague.UseVisualStyleBackColor = true;
-            this.btnDeleteLeague.Click += new System.EventHandler(this.btnDeleteLeague_Click);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label21.Location = new System.Drawing.Point(0, 352);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(22, 15);
-            this.label21.TabIndex = 8;
-            this.label21.Text = "ID:";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label22.Location = new System.Drawing.Point(212, 352);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(45, 15);
-            this.label22.TabIndex = 9;
-            this.label22.Text = "Сезон:";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label23.Location = new System.Drawing.Point(106, 352);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(35, 15);
-            this.label23.TabIndex = 10;
-            this.label23.Text = "Име:";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label24.Location = new System.Drawing.Point(140, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(50, 20);
-            this.label24.TabIndex = 11;
-            this.label24.Text = "Лиги:";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label25.Location = new System.Drawing.Point(489, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(203, 20);
-            this.label25.TabIndex = 12;
-            this.label25.Text = "Играчи в избраната лига:";
-            // 
-            // dgvParticipants
-            // 
-            this.dgvParticipants.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvParticipants.Location = new System.Drawing.Point(366, 23);
-            this.dgvParticipants.Name = "dgvParticipants";
-            this.dgvParticipants.ReadOnly = true;
-            this.dgvParticipants.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvParticipants.Size = new System.Drawing.Size(427, 326);
-            this.dgvParticipants.TabIndex = 13;
-            // 
-            // cboAvailableClubs
-            // 
-            this.cboAvailableClubs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboAvailableClubs.FormattingEnabled = true;
-            this.cboAvailableClubs.Location = new System.Drawing.Point(366, 369);
-            this.cboAvailableClubs.Name = "cboAvailableClubs";
-            this.cboAvailableClubs.Size = new System.Drawing.Size(121, 21);
-            this.cboAvailableClubs.TabIndex = 14;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label26.Location = new System.Drawing.Point(363, 351);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(112, 15);
-            this.label26.TabIndex = 15;
-            this.label26.Text = "Свободни отбори:";
+            this.btnAddClubToLeague.Location = new System.Drawing.Point(366, 391);
+            this.btnAddClubToLeague.Name = "btnAddClubToLeague";
+            this.btnAddClubToLeague.Size = new System.Drawing.Size(215, 23);
+            this.btnAddClubToLeague.TabIndex = 17;
+            this.btnAddClubToLeague.Text = "Добави";
+            this.btnAddClubToLeague.UseVisualStyleBackColor = true;
+            this.btnAddClubToLeague.Click += new System.EventHandler(this.btnAddClubToLeague_Click);
             // 
             // btnRemoveClubFromLeague
             // 
@@ -871,15 +746,200 @@
             this.btnRemoveClubFromLeague.UseVisualStyleBackColor = true;
             this.btnRemoveClubFromLeague.Click += new System.EventHandler(this.btnRemoveClubFromLeague_Click);
             // 
-            // btnAddClubToLeague
+            // label26
             // 
-            this.btnAddClubToLeague.Location = new System.Drawing.Point(366, 391);
-            this.btnAddClubToLeague.Name = "btnAddClubToLeague";
-            this.btnAddClubToLeague.Size = new System.Drawing.Size(215, 23);
-            this.btnAddClubToLeague.TabIndex = 17;
-            this.btnAddClubToLeague.Text = "Добави";
-            this.btnAddClubToLeague.UseVisualStyleBackColor = true;
-            this.btnAddClubToLeague.Click += new System.EventHandler(this.btnAddClubToLeague_Click);
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label26.Location = new System.Drawing.Point(363, 351);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(112, 15);
+            this.label26.TabIndex = 15;
+            this.label26.Text = "Свободни отбори:";
+            // 
+            // cboAvailableClubs
+            // 
+            this.cboAvailableClubs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAvailableClubs.FormattingEnabled = true;
+            this.cboAvailableClubs.Location = new System.Drawing.Point(366, 369);
+            this.cboAvailableClubs.Name = "cboAvailableClubs";
+            this.cboAvailableClubs.Size = new System.Drawing.Size(121, 21);
+            this.cboAvailableClubs.TabIndex = 14;
+            // 
+            // dgvParticipants
+            // 
+            this.dgvParticipants.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvParticipants.Location = new System.Drawing.Point(366, 23);
+            this.dgvParticipants.Name = "dgvParticipants";
+            this.dgvParticipants.ReadOnly = true;
+            this.dgvParticipants.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvParticipants.Size = new System.Drawing.Size(427, 326);
+            this.dgvParticipants.TabIndex = 13;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label25.Location = new System.Drawing.Point(489, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(203, 20);
+            this.label25.TabIndex = 12;
+            this.label25.Text = "Играчи в избраната лига:";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label24.Location = new System.Drawing.Point(140, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(50, 20);
+            this.label24.TabIndex = 11;
+            this.label24.Text = "Лиги:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label23.Location = new System.Drawing.Point(106, 352);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(35, 15);
+            this.label23.TabIndex = 10;
+            this.label23.Text = "Име:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label22.Location = new System.Drawing.Point(212, 352);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(45, 15);
+            this.label22.TabIndex = 9;
+            this.label22.Text = "Сезон:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label21.Location = new System.Drawing.Point(0, 352);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(22, 15);
+            this.label21.TabIndex = 8;
+            this.label21.Text = "ID:";
+            // 
+            // btnDeleteLeague
+            // 
+            this.btnDeleteLeague.Location = new System.Drawing.Point(215, 396);
+            this.btnDeleteLeague.Name = "btnDeleteLeague";
+            this.btnDeleteLeague.Size = new System.Drawing.Size(100, 23);
+            this.btnDeleteLeague.TabIndex = 7;
+            this.btnDeleteLeague.Text = "Изтрий";
+            this.btnDeleteLeague.UseVisualStyleBackColor = true;
+            this.btnDeleteLeague.Click += new System.EventHandler(this.btnDeleteLeague_Click);
+            // 
+            // btnEditLeague
+            // 
+            this.btnEditLeague.Location = new System.Drawing.Point(109, 396);
+            this.btnEditLeague.Name = "btnEditLeague";
+            this.btnEditLeague.Size = new System.Drawing.Size(100, 23);
+            this.btnEditLeague.TabIndex = 6;
+            this.btnEditLeague.Text = "Редактирай";
+            this.btnEditLeague.UseVisualStyleBackColor = true;
+            this.btnEditLeague.Click += new System.EventHandler(this.btnEditLeague_Click);
+            // 
+            // btnAddLeague
+            // 
+            this.btnAddLeague.Location = new System.Drawing.Point(3, 396);
+            this.btnAddLeague.Name = "btnAddLeague";
+            this.btnAddLeague.Size = new System.Drawing.Size(100, 23);
+            this.btnAddLeague.TabIndex = 5;
+            this.btnAddLeague.Text = "Добави";
+            this.btnAddLeague.UseVisualStyleBackColor = true;
+            this.btnAddLeague.Click += new System.EventHandler(this.btnAddLeague_Click);
+            // 
+            // txtLeagueName
+            // 
+            this.txtLeagueName.Location = new System.Drawing.Point(109, 370);
+            this.txtLeagueName.Name = "txtLeagueName";
+            this.txtLeagueName.Size = new System.Drawing.Size(100, 20);
+            this.txtLeagueName.TabIndex = 4;
+            // 
+            // txtLeagueSeason
+            // 
+            this.txtLeagueSeason.Location = new System.Drawing.Point(215, 370);
+            this.txtLeagueSeason.Name = "txtLeagueSeason";
+            this.txtLeagueSeason.Size = new System.Drawing.Size(100, 20);
+            this.txtLeagueSeason.TabIndex = 2;
+            // 
+            // txtLeagueId
+            // 
+            this.txtLeagueId.Enabled = false;
+            this.txtLeagueId.Location = new System.Drawing.Point(3, 370);
+            this.txtLeagueId.Name = "txtLeagueId";
+            this.txtLeagueId.ReadOnly = true;
+            this.txtLeagueId.Size = new System.Drawing.Size(100, 20);
+            this.txtLeagueId.TabIndex = 1;
+            // 
+            // dgvLeagues
+            // 
+            this.dgvLeagues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLeagues.Location = new System.Drawing.Point(0, 23);
+            this.dgvLeagues.Name = "dgvLeagues";
+            this.dgvLeagues.ReadOnly = true;
+            this.dgvLeagues.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLeagues.Size = new System.Drawing.Size(360, 326);
+            this.dgvLeagues.TabIndex = 0;
+            this.dgvLeagues.SelectionChanged += new System.EventHandler(this.dgvLeagues_SelectionChanged);
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.btnGenerateDouble);
+            this.tabPage5.Controls.Add(this.btnGenerateSingle);
+            this.tabPage5.Controls.Add(this.dgvMatches);
+            this.tabPage5.Controls.Add(this.cboScheduleLeague);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(793, 422);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Програма";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // cboScheduleLeague
+            // 
+            this.cboScheduleLeague.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboScheduleLeague.FormattingEnabled = true;
+            this.cboScheduleLeague.Location = new System.Drawing.Point(3, 393);
+            this.cboScheduleLeague.Name = "cboScheduleLeague";
+            this.cboScheduleLeague.Size = new System.Drawing.Size(203, 21);
+            this.cboScheduleLeague.TabIndex = 0;
+            this.cboScheduleLeague.SelectedIndexChanged += new System.EventHandler(this.cboScheduleLeague_SelectedIndexChanged);
+            // 
+            // dgvMatches
+            // 
+            this.dgvMatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatches.Location = new System.Drawing.Point(0, 0);
+            this.dgvMatches.Name = "dgvMatches";
+            this.dgvMatches.ReadOnly = true;
+            this.dgvMatches.Size = new System.Drawing.Size(793, 345);
+            this.dgvMatches.TabIndex = 1;
+            // 
+            // btnGenerateSingle
+            // 
+            this.btnGenerateSingle.Location = new System.Drawing.Point(212, 391);
+            this.btnGenerateSingle.Name = "btnGenerateSingle";
+            this.btnGenerateSingle.Size = new System.Drawing.Size(286, 23);
+            this.btnGenerateSingle.TabIndex = 2;
+            this.btnGenerateSingle.Text = "Генерирай 1 полусезон (Една среща)";
+            this.btnGenerateSingle.UseVisualStyleBackColor = true;
+            this.btnGenerateSingle.Click += new System.EventHandler(this.btnGenerateSingle_Click);
+            // 
+            // btnGenerateDouble
+            // 
+            this.btnGenerateDouble.Location = new System.Drawing.Point(504, 391);
+            this.btnGenerateDouble.Name = "btnGenerateDouble";
+            this.btnGenerateDouble.Size = new System.Drawing.Size(286, 23);
+            this.btnGenerateDouble.TabIndex = 3;
+            this.btnGenerateDouble.Text = "Генерирай 2 полусезона (Разменено гостуване)";
+            this.btnGenerateDouble.UseVisualStyleBackColor = true;
+            this.btnGenerateDouble.Click += new System.EventHandler(this.btnGenerateDouble_Click);
             // 
             // Form1
             // 
@@ -900,12 +960,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTransfers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTransferFee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTransfers)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLeagues)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParticipants)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLeagues)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMatches)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -984,6 +1046,11 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.ComboBox cboAvailableClubs;
         private System.Windows.Forms.DataGridView dgvParticipants;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button btnGenerateDouble;
+        private System.Windows.Forms.Button btnGenerateSingle;
+        private System.Windows.Forms.DataGridView dgvMatches;
+        private System.Windows.Forms.ComboBox cboScheduleLeague;
     }
 }
 
