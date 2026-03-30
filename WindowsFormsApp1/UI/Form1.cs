@@ -11,6 +11,9 @@ namespace FootballProject
         private TransfersRepository _transfersRepo = new TransfersRepository();
         private LeaguesRepository _leaguesRepo = new LeaguesRepository();
         private MatchesRepository _matchesRepo = new MatchesRepository();
+        private MatchEventsRepository _matchEventsRepo = new MatchEventsRepository();
+        private Match _selectedMatch = null;
+        private StandingsRepository _standingsRepo = new StandingsRepository();
 
         public Form1()
         {
@@ -26,6 +29,8 @@ namespace FootballProject
             LoadTransfersData();
             LoadLeaguesData();
             LoadScheduleDropdown();
+            LoadEventsLeagueDropdown();
+            LoadStandingsLeagueDropdown();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -506,6 +511,174 @@ namespace FootballProject
                     MessageBox.Show(ex.Message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+        }
+
+
+        // ====================================================================
+        //                       ТАБ 6: РЕЗУЛТАТИ И СЪБИТИЯ
+        // ====================================================================
+
+        private void LoadEventsLeagueDropdown()
+        {
+            cboEventsLeague.DataSource = _leaguesRepo.GetAllLeagues();
+            cboEventsLeague.DisplayMember = "Name";
+            cboEventsLeague.ValueMember = "LeagueId";
+        }
+
+        private void cboEventsLeague_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboEventsLeague.SelectedValue == null || !(cboEventsLeague.SelectedValue is int)) return;
+
+            int leagueId = Convert.ToInt32(cboEventsLeague.SelectedValue);
+            dgvEventsMatches.DataSource = _matchesRepo.GetMatches(leagueId);
+            dgvEventsMatches.ClearSelection();
+
+            // Скриваме излишното
+            if (dgvEventsMatches.Columns.Contains("LeagueId")) dgvEventsMatches.Columns["LeagueId"].Visible = false;
+
+            dgvMatchEvents.DataSource = null;
+            cboEventPlayer.DataSource = null;
+            _selectedMatch = null;
+        }
+
+        // Когато кликнем на мач вляво -> Зареждаме събитията му вдясно
+        private void dgvEventsMatches_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvEventsMatches.SelectedRows.Count > 0)
+            {
+                _selectedMatch = (Match)dgvEventsMatches.SelectedRows[0].DataBoundItem;
+                LoadMatchEventsAndPlayers();
+            }
+        }
+
+        private void LoadMatchEventsAndPlayers()
+        {
+            if (_selectedMatch == null) return;
+
+            // 1. Зареждаме събитията (Голове, Картони)
+            dgvMatchEvents.DataSource = _matchEventsRepo.GetEventsForMatch(_selectedMatch.MatchId);
+
+            // Скриваме ID-тата
+            if (dgvMatchEvents.Columns.Contains("MatchId")) dgvMatchEvents.Columns["MatchId"].Visible = false;
+            if (dgvMatchEvents.Columns.Contains("PlayerId")) dgvMatchEvents.Columns["PlayerId"].Visible = false;
+            if (dgvMatchEvents.Columns.Contains("TeamId")) dgvMatchEvents.Columns["TeamId"].Visible = false;
+
+            // 2. Зареждаме ИГРАЧИТЕ (САМО от двата отбора в мача!)
+            var matchPlayers = _matchEventsRepo.GetPlayersForMatch(_selectedMatch.HomeTeamId, _selectedMatch.AwayTeamId);
+
+            // Използваме анонимен обект, за да покажем "Име Фамилия (Отбор)"
+            var formattedPlayers = new List<object>();
+            foreach (var p in matchPlayers)
+            {
+                formattedPlayers.Add(new
+                {
+                    PlayerId = p.PlayerId,
+                    TeamId = p.TeamId,
+                    DisplayName = $"{p.FirstName} {p.LastName} ({p.TeamName})"
+                });
+            }
+
+            cboEventPlayer.DataSource = formattedPlayers;
+            cboEventPlayer.DisplayMember = "DisplayName";
+            cboEventPlayer.ValueMember = "PlayerId";
+        }
+
+        private void btnAddEvent_Click(object sender, EventArgs e)
+        {
+            if (_selectedMatch == null) { MessageBox.Show("Изберете мач!"); return; }
+            if (cboEventPlayer.SelectedValue == null || cboEventType.SelectedItem == null) { MessageBox.Show("Изберете играч и тип събитие!"); return; }
+
+            // Взимаме TeamId от избрания играч в падащото меню
+            dynamic selectedPlayer = cboEventPlayer.SelectedItem;
+            int teamId = selectedPlayer.TeamId;
+
+            var newEvent = new MatchEvent
+            {
+                MatchId = _selectedMatch.MatchId,
+                PlayerId = (int)cboEventPlayer.SelectedValue,
+                TeamId = teamId,
+                Minute = (int)numEventMinute.Value,
+                EventType = cboEventType.SelectedItem.ToString()
+            };
+
+            _matchEventsRepo.AddEvent(newEvent);
+            LoadMatchEventsAndPlayers(); // Презареждаме таблицата със събития
+        }
+
+        private void btnDeleteEvent_Click(object sender, EventArgs e)
+        {
+            if (dgvMatchEvents.SelectedRows.Count > 0)
+            {
+                var ev = (MatchEvent)dgvMatchEvents.SelectedRows[0].DataBoundItem;
+                _matchEventsRepo.DeleteEvent(ev.EventId);
+                LoadMatchEventsAndPlayers();
+            }
+        }
+
+        // БОНУС: Автоматично изчисляване на резултата
+        private void btnAutoCalculate_Click(object sender, EventArgs e)
+        {
+            if (_selectedMatch == null) return;
+
+            _matchEventsRepo.AutoCalculateScore(_selectedMatch.MatchId, _selectedMatch.HomeTeamId, _selectedMatch.AwayTeamId);
+
+            MessageBox.Show("Резултатът на мача беше обновен успешно на база вкараните голове!", "Успех");
+
+            // Презареждаме списъка с мачове вляво, за да видим новия резултат (напр. 2:1)
+            int leagueId = Convert.ToInt32(cboEventsLeague.SelectedValue);
+            dgvEventsMatches.DataSource = _matchesRepo.GetMatches(leagueId);
+        }
+
+        // ====================================================================
+        //                       ТАБ 7: КЛАСИРАНЕ
+        // ====================================================================
+
+        private void LoadStandingsLeagueDropdown()
+        {
+            cboStandingsLeague.DataSource = _leaguesRepo.GetAllLeagues();
+            cboStandingsLeague.DisplayMember = "Name";
+            cboStandingsLeague.ValueMember = "LeagueId";
+        }
+
+        private void cboStandingsLeague_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateStandingsTable();
+        }
+
+        private void btnRefreshStandings_Click(object sender, EventArgs e)
+        {
+            UpdateStandingsTable();
+        }
+
+        private void UpdateStandingsTable()
+        {
+            if (cboStandingsLeague.SelectedValue == null || !(cboStandingsLeague.SelectedValue is int)) return;
+
+            try
+            {
+                int leagueId = Convert.ToInt32(cboStandingsLeague.SelectedValue);
+                var table = _standingsRepo.GetStandings(leagueId);
+
+                dgvStandings.DataSource = table;
+
+                // Настройка на колоните за по-красив вид
+                if (dgvStandings.Columns.Contains("TeamId")) dgvStandings.Columns["TeamId"].Visible = false;
+                if (dgvStandings.Columns.Contains("GoalsFor")) dgvStandings.Columns["GoalsFor"].Visible = false;
+                if (dgvStandings.Columns.Contains("GoalsAgainst")) dgvStandings.Columns["GoalsAgainst"].Visible = false;
+
+                // Преименуване на заглавията на български
+                dgvStandings.Columns["TeamName"].HeaderText = "Отбор";
+                dgvStandings.Columns["Played"].HeaderText = "М";
+                dgvStandings.Columns["Wins"].HeaderText = "П";
+                dgvStandings.Columns["Draws"].HeaderText = "Р";
+                dgvStandings.Columns["Losses"].HeaderText = "З";
+                dgvStandings.Columns["GoalsDisplay"].HeaderText = "Голове";
+                dgvStandings.Columns["GoalDifference"].HeaderText = "ГР";
+                dgvStandings.Columns["Points"].HeaderText = "Т";
+
+                dgvStandings.ClearSelection();
+            }
+            catch (Exception ex) { MessageBox.Show("Грешка при класиране: " + ex.Message); }
         }
     }
 }

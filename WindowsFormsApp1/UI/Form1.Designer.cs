@@ -101,10 +101,31 @@
             this.txtLeagueId = new System.Windows.Forms.TextBox();
             this.dgvLeagues = new System.Windows.Forms.DataGridView();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.cboScheduleLeague = new System.Windows.Forms.ComboBox();
-            this.dgvMatches = new System.Windows.Forms.DataGridView();
-            this.btnGenerateSingle = new System.Windows.Forms.Button();
             this.btnGenerateDouble = new System.Windows.Forms.Button();
+            this.btnGenerateSingle = new System.Windows.Forms.Button();
+            this.dgvMatches = new System.Windows.Forms.DataGridView();
+            this.cboScheduleLeague = new System.Windows.Forms.ComboBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.cboEventsLeague = new System.Windows.Forms.ComboBox();
+            this.dgvEventsMatches = new System.Windows.Forms.DataGridView();
+            this.dgvMatchEvents = new System.Windows.Forms.DataGridView();
+            this.cboEventPlayer = new System.Windows.Forms.ComboBox();
+            this.cboEventType = new System.Windows.Forms.ComboBox();
+            this.numEventMinute = new System.Windows.Forms.NumericUpDown();
+            this.btnAutoCalculate = new System.Windows.Forms.Button();
+            this.btnDeleteEvent = new System.Windows.Forms.Button();
+            this.btnAddEvent = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.cboStandingsLeague = new System.Windows.Forms.ComboBox();
+            this.dgvStandings = new System.Windows.Forms.DataGridView();
+            this.btnRefreshStandings = new System.Windows.Forms.Button();
+            this.label33 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeams)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -118,6 +139,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLeagues)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatches)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEventsMatches)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMatchEvents)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numEventMinute)).BeginInit();
+            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStandings)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvTeams
@@ -200,6 +227,8 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Location = new System.Drawing.Point(-1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -902,24 +931,15 @@
             this.tabPage5.Text = "Програма";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // cboScheduleLeague
+            // btnGenerateDouble
             // 
-            this.cboScheduleLeague.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboScheduleLeague.FormattingEnabled = true;
-            this.cboScheduleLeague.Location = new System.Drawing.Point(3, 393);
-            this.cboScheduleLeague.Name = "cboScheduleLeague";
-            this.cboScheduleLeague.Size = new System.Drawing.Size(203, 21);
-            this.cboScheduleLeague.TabIndex = 0;
-            this.cboScheduleLeague.SelectedIndexChanged += new System.EventHandler(this.cboScheduleLeague_SelectedIndexChanged);
-            // 
-            // dgvMatches
-            // 
-            this.dgvMatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMatches.Location = new System.Drawing.Point(0, 0);
-            this.dgvMatches.Name = "dgvMatches";
-            this.dgvMatches.ReadOnly = true;
-            this.dgvMatches.Size = new System.Drawing.Size(793, 345);
-            this.dgvMatches.TabIndex = 1;
+            this.btnGenerateDouble.Location = new System.Drawing.Point(504, 391);
+            this.btnGenerateDouble.Name = "btnGenerateDouble";
+            this.btnGenerateDouble.Size = new System.Drawing.Size(286, 23);
+            this.btnGenerateDouble.TabIndex = 3;
+            this.btnGenerateDouble.Text = "Генерирай 2 полусезона (Разменено гостуване)";
+            this.btnGenerateDouble.UseVisualStyleBackColor = true;
+            this.btnGenerateDouble.Click += new System.EventHandler(this.btnGenerateDouble_Click);
             // 
             // btnGenerateSingle
             // 
@@ -931,15 +951,266 @@
             this.btnGenerateSingle.UseVisualStyleBackColor = true;
             this.btnGenerateSingle.Click += new System.EventHandler(this.btnGenerateSingle_Click);
             // 
-            // btnGenerateDouble
+            // dgvMatches
             // 
-            this.btnGenerateDouble.Location = new System.Drawing.Point(504, 391);
-            this.btnGenerateDouble.Name = "btnGenerateDouble";
-            this.btnGenerateDouble.Size = new System.Drawing.Size(286, 23);
-            this.btnGenerateDouble.TabIndex = 3;
-            this.btnGenerateDouble.Text = "Генерирай 2 полусезона (Разменено гостуване)";
-            this.btnGenerateDouble.UseVisualStyleBackColor = true;
-            this.btnGenerateDouble.Click += new System.EventHandler(this.btnGenerateDouble_Click);
+            this.dgvMatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatches.Location = new System.Drawing.Point(0, 0);
+            this.dgvMatches.Name = "dgvMatches";
+            this.dgvMatches.ReadOnly = true;
+            this.dgvMatches.Size = new System.Drawing.Size(793, 345);
+            this.dgvMatches.TabIndex = 1;
+            // 
+            // cboScheduleLeague
+            // 
+            this.cboScheduleLeague.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboScheduleLeague.FormattingEnabled = true;
+            this.cboScheduleLeague.Location = new System.Drawing.Point(3, 393);
+            this.cboScheduleLeague.Name = "cboScheduleLeague";
+            this.cboScheduleLeague.Size = new System.Drawing.Size(203, 21);
+            this.cboScheduleLeague.TabIndex = 0;
+            this.cboScheduleLeague.SelectedIndexChanged += new System.EventHandler(this.cboScheduleLeague_SelectedIndexChanged);
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.label32);
+            this.tabPage6.Controls.Add(this.label31);
+            this.tabPage6.Controls.Add(this.label30);
+            this.tabPage6.Controls.Add(this.label29);
+            this.tabPage6.Controls.Add(this.label28);
+            this.tabPage6.Controls.Add(this.label27);
+            this.tabPage6.Controls.Add(this.btnAddEvent);
+            this.tabPage6.Controls.Add(this.btnDeleteEvent);
+            this.tabPage6.Controls.Add(this.btnAutoCalculate);
+            this.tabPage6.Controls.Add(this.numEventMinute);
+            this.tabPage6.Controls.Add(this.cboEventType);
+            this.tabPage6.Controls.Add(this.cboEventPlayer);
+            this.tabPage6.Controls.Add(this.dgvMatchEvents);
+            this.tabPage6.Controls.Add(this.dgvEventsMatches);
+            this.tabPage6.Controls.Add(this.cboEventsLeague);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(793, 422);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Събития";
+            // 
+            // cboEventsLeague
+            // 
+            this.cboEventsLeague.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEventsLeague.FormattingEnabled = true;
+            this.cboEventsLeague.Location = new System.Drawing.Point(100, 393);
+            this.cboEventsLeague.Name = "cboEventsLeague";
+            this.cboEventsLeague.Size = new System.Drawing.Size(121, 21);
+            this.cboEventsLeague.TabIndex = 0;
+            this.cboEventsLeague.SelectedIndexChanged += new System.EventHandler(this.cboEventsLeague_SelectedIndexChanged);
+            // 
+            // dgvEventsMatches
+            // 
+            this.dgvEventsMatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEventsMatches.Location = new System.Drawing.Point(0, 35);
+            this.dgvEventsMatches.Name = "dgvEventsMatches";
+            this.dgvEventsMatches.ReadOnly = true;
+            this.dgvEventsMatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEventsMatches.Size = new System.Drawing.Size(318, 350);
+            this.dgvEventsMatches.TabIndex = 1;
+            this.dgvEventsMatches.SelectionChanged += new System.EventHandler(this.dgvEventsMatches_SelectionChanged);
+            // 
+            // dgvMatchEvents
+            // 
+            this.dgvMatchEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatchEvents.Location = new System.Drawing.Point(324, 35);
+            this.dgvMatchEvents.Name = "dgvMatchEvents";
+            this.dgvMatchEvents.ReadOnly = true;
+            this.dgvMatchEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMatchEvents.Size = new System.Drawing.Size(469, 308);
+            this.dgvMatchEvents.TabIndex = 2;
+            // 
+            // cboEventPlayer
+            // 
+            this.cboEventPlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEventPlayer.FormattingEnabled = true;
+            this.cboEventPlayer.Location = new System.Drawing.Point(324, 364);
+            this.cboEventPlayer.Name = "cboEventPlayer";
+            this.cboEventPlayer.Size = new System.Drawing.Size(145, 21);
+            this.cboEventPlayer.TabIndex = 3;
+            // 
+            // cboEventType
+            // 
+            this.cboEventType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEventType.FormattingEnabled = true;
+            this.cboEventType.Items.AddRange(new object[] {
+            "Гол",
+            "Жълт картон",
+            "Червен картон",
+            "Фал"});
+            this.cboEventType.Location = new System.Drawing.Point(475, 364);
+            this.cboEventType.Name = "cboEventType";
+            this.cboEventType.Size = new System.Drawing.Size(145, 21);
+            this.cboEventType.TabIndex = 4;
+            // 
+            // numEventMinute
+            // 
+            this.numEventMinute.Location = new System.Drawing.Point(626, 365);
+            this.numEventMinute.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.numEventMinute.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numEventMinute.Name = "numEventMinute";
+            this.numEventMinute.Size = new System.Drawing.Size(145, 20);
+            this.numEventMinute.TabIndex = 5;
+            this.numEventMinute.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // btnAutoCalculate
+            // 
+            this.btnAutoCalculate.Location = new System.Drawing.Point(626, 391);
+            this.btnAutoCalculate.Name = "btnAutoCalculate";
+            this.btnAutoCalculate.Size = new System.Drawing.Size(145, 23);
+            this.btnAutoCalculate.TabIndex = 6;
+            this.btnAutoCalculate.Text = "Изчисли голове";
+            this.btnAutoCalculate.UseVisualStyleBackColor = true;
+            this.btnAutoCalculate.Click += new System.EventHandler(this.btnAutoCalculate_Click);
+            // 
+            // btnDeleteEvent
+            // 
+            this.btnDeleteEvent.Location = new System.Drawing.Point(475, 391);
+            this.btnDeleteEvent.Name = "btnDeleteEvent";
+            this.btnDeleteEvent.Size = new System.Drawing.Size(145, 23);
+            this.btnDeleteEvent.TabIndex = 7;
+            this.btnDeleteEvent.Text = "Изтрий събитие";
+            this.btnDeleteEvent.UseVisualStyleBackColor = true;
+            this.btnDeleteEvent.Click += new System.EventHandler(this.btnDeleteEvent_Click);
+            // 
+            // btnAddEvent
+            // 
+            this.btnAddEvent.Location = new System.Drawing.Point(324, 391);
+            this.btnAddEvent.Name = "btnAddEvent";
+            this.btnAddEvent.Size = new System.Drawing.Size(145, 23);
+            this.btnAddEvent.TabIndex = 8;
+            this.btnAddEvent.Text = "Добави събитие";
+            this.btnAddEvent.UseVisualStyleBackColor = true;
+            this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.label27.Location = new System.Drawing.Point(19, 10);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(284, 22);
+            this.label27.TabIndex = 9;
+            this.label27.Text = "Списък от мачове в Програмата";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.label28.Location = new System.Drawing.Point(435, 10);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(227, 22);
+            this.label28.TabIndex = 10;
+            this.label28.Text = "Събития от избрания мач";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label29.Location = new System.Drawing.Point(3, 395);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(81, 15);
+            this.label29.TabIndex = 11;
+            this.label29.Text = "Първенство:";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label30.Location = new System.Drawing.Point(623, 346);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(54, 15);
+            this.label30.TabIndex = 12;
+            this.label30.Text = "Минута:";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label31.Location = new System.Drawing.Point(472, 346);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(60, 15);
+            this.label31.TabIndex = 13;
+            this.label31.Text = "Събитие:";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label32.Location = new System.Drawing.Point(324, 346);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(44, 15);
+            this.label32.TabIndex = 14;
+            this.label32.Text = "Играч:";
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.label33);
+            this.tabPage7.Controls.Add(this.btnRefreshStandings);
+            this.tabPage7.Controls.Add(this.dgvStandings);
+            this.tabPage7.Controls.Add(this.cboStandingsLeague);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(793, 422);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Класиране";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // cboStandingsLeague
+            // 
+            this.cboStandingsLeague.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStandingsLeague.FormattingEnabled = true;
+            this.cboStandingsLeague.Location = new System.Drawing.Point(3, 393);
+            this.cboStandingsLeague.Name = "cboStandingsLeague";
+            this.cboStandingsLeague.Size = new System.Drawing.Size(163, 21);
+            this.cboStandingsLeague.TabIndex = 0;
+            this.cboStandingsLeague.SelectedIndexChanged += new System.EventHandler(this.cboStandingsLeague_SelectedIndexChanged);
+            // 
+            // dgvStandings
+            // 
+            this.dgvStandings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStandings.Location = new System.Drawing.Point(0, 0);
+            this.dgvStandings.Name = "dgvStandings";
+            this.dgvStandings.ReadOnly = true;
+            this.dgvStandings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvStandings.Size = new System.Drawing.Size(793, 370);
+            this.dgvStandings.TabIndex = 1;
+            // 
+            // btnRefreshStandings
+            // 
+            this.btnRefreshStandings.Location = new System.Drawing.Point(172, 391);
+            this.btnRefreshStandings.Name = "btnRefreshStandings";
+            this.btnRefreshStandings.Size = new System.Drawing.Size(163, 23);
+            this.btnRefreshStandings.TabIndex = 2;
+            this.btnRefreshStandings.Text = "Обнови класирането";
+            this.btnRefreshStandings.UseVisualStyleBackColor = true;
+            this.btnRefreshStandings.Click += new System.EventHandler(this.btnRefreshStandings_Click);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label33.Location = new System.Drawing.Point(3, 373);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(106, 17);
+            this.label33.TabIndex = 3;
+            this.label33.Text = "Избор на лига:";
             // 
             // Form1
             // 
@@ -968,6 +1239,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLeagues)).EndInit();
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatches)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEventsMatches)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMatchEvents)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numEventMinute)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStandings)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1051,6 +1330,27 @@
         private System.Windows.Forms.Button btnGenerateSingle;
         private System.Windows.Forms.DataGridView dgvMatches;
         private System.Windows.Forms.ComboBox cboScheduleLeague;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.NumericUpDown numEventMinute;
+        private System.Windows.Forms.ComboBox cboEventType;
+        private System.Windows.Forms.ComboBox cboEventPlayer;
+        private System.Windows.Forms.DataGridView dgvMatchEvents;
+        private System.Windows.Forms.DataGridView dgvEventsMatches;
+        private System.Windows.Forms.ComboBox cboEventsLeague;
+        private System.Windows.Forms.Button btnAddEvent;
+        private System.Windows.Forms.Button btnDeleteEvent;
+        private System.Windows.Forms.Button btnAutoCalculate;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Button btnRefreshStandings;
+        private System.Windows.Forms.DataGridView dgvStandings;
+        private System.Windows.Forms.ComboBox cboStandingsLeague;
+        private System.Windows.Forms.Label label33;
     }
 }
 

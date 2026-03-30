@@ -18,5 +18,7 @@ namespace FootballProject
         public int? AwayScore { get; set; }
 
         public DateTime MatchDate { get; set; }
+
+        public string Stadium { get; set; }
     }
 }
