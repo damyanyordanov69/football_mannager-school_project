@@ -71,3 +71,19 @@ CREATE TABLE Matches (
     FOREIGN KEY (home_team_id) REFERENCES Teams(team_id) ON DELETE CASCADE,
     FOREIGN KEY (away_team_id) REFERENCES Teams(team_id) ON DELETE CASCADE
 );
+
+-- Добавяме Стадион към мачовете
+ALTER TABLE Matches ADD COLUMN IF NOT EXISTS stadium VARCHAR(100);
+
+-- Създаваме обединена таблица за всички събития (Гол, Картон, Фал)
+CREATE TABLE IF NOT EXISTS MatchEvents (
+    event_id INT AUTO_INCREMENT PRIMARY KEY,
+    match_id INT NOT NULL,
+    player_id INT NOT NULL,
+    team_id INT NOT NULL,
+    minute INT NOT NULL CHECK (minute >= 1 AND minute <= 120),
+    event_type VARCHAR(50) NOT NULL, -- Тук ще пише 'Гол', 'Жълт картон', 'Червен картон' или 'Фал'
+    FOREIGN KEY (match_id) REFERENCES Matches(match_id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES Players(player_id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES Teams(team_id) ON DELETE CASCADE
+);
